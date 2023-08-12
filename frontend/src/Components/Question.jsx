@@ -1,32 +1,28 @@
-import {  Stack,Button } from '@mui/material'
-import QuizCard from './QuizCard'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+// commented
+
+import { Stack, Button } from "@mui/material";
+import QuizCard from "./QuizCard";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Question = () => {
-   const [recieved_data,set_recieved_data]=useState([]);
-   const navigate = useNavigate();
-
-  //  const [answered_data,set_answered_data]=useState({});
-     const [answered_data,set_answered_data]=useState({});
-    const fun=async ()=>{
-      try{
-        const data=await fetch("http://localhost:4000/question")
-        const datajson=await data.json();
-        if(data.ok)
-        {
-          
-            set_recieved_data(datajson);
-            console.log("this was done successfully")
-          //  console.log(datajson)
-         
-        }
-        else{
-          // 
-          console.log(" hello the error is here ")
-        }
+  const [recieved_data, set_recieved_data] = useState([]);
+  const navigate = useNavigate();
+  const [answered_data, set_answered_data] = useState({});
+  const fun = async () => {
+    try {
+      const data = await fetch("http://localhost:4000/question");
+      const datajson = await data.json();
+      if (data.ok) {
+        set_recieved_data(datajson);
+        console.log("THis is recieved data");
+        console.log(recieved_data);
+        console.log("this was done successfully");
+      } else {
+        console.log(" There is an error in reciving data ");
       }
+<<<<<<< HEAD
       catch(error){
         console.log(error+" error has occured here ")
       }
@@ -81,36 +77,65 @@ const Question = () => {
         console.log(evaluation_data)
         console.log(evaluation_data_json)
         console.log("tall")
+=======
+    } catch (error) {
+      console.log(error + " error has occured here ");
+    }
+  };
+  const to_submit_the_data = async () => {
+    console.log("Called Submit");
+    console.log(answered_data);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json,",
+      },
+      body: JSON.stringify(answered_data),
+    };
+    try {
+      console.log(options);
+      const evaluation_data = await fetch(
+        "http://localhost:4000/evaluate",
+        options
+      );
+      console.log(evaluation_data);
+      if (evaluation_data.ok) {
+        const evaluation_data_json = await evaluation_data.json();
+>>>>>>> 8e61ba3777377d4f246794f23fafd2d130cf7e11
         console.log(evaluation_data_json);
         navigate("/evaluate");
+      } else {
+        console.log("server response was not okay");
       }
-      else{
-         console.log("server response was not okay")
-      }
+    } catch (error) {
+      console.log("an error occured for evaluation" + error);
     }
-    catch(error){
-      console.log("an error occured for evaluation"+error)
-
-    }
-   }
-   useEffect(()=>{
+  };
+  useEffect(() => {
     fun();
-   },[])
+  }, []);
 
-  // const togetdata=fetch("",options);
-  // sabse pehli cheej toh yeh hai ki mughe is page pe paate hi quiz ke question dikhane hai 
-  // vo usestate se hoga i think 
   return (
-
     <Stack gap={2}>
+<<<<<<< HEAD
       { recieved_data.map((element,index)=>{
        return <QuizCard key={index} prop_name={element} answered_array={set_answered_data} answered_array_second={answered_data}> </QuizCard>
+=======
+      {recieved_data.map((element) => {
+        return (
+          <QuizCard
+            prop_name={element}
+            answered_array={set_answered_data}
+            answered_array_second={answered_data}
+          ></QuizCard>
+        );
+>>>>>>> 8e61ba3777377d4f246794f23fafd2d130cf7e11
       })}
-{/*      
-     <QuizCard prop_name={recieved_data[0]}/> */}
-    <Button variant="contained" onClick={to_submit_the_data}>Submit Responses</Button>
+      <Button variant="contained" onClick={to_submit_the_data}>
+        Submit Responses
+      </Button>
     </Stack>
-  )
-}
+  );
+};
 
-export default Question
+export default Question;
