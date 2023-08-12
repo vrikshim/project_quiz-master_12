@@ -1,4 +1,5 @@
 // commented
+import axios from "axios";
 
 import { Stack, Button } from "@mui/material";
 import QuizCard from "./QuizCard";
@@ -27,32 +28,41 @@ const Question = () => {
     }
   };
   const to_submit_the_data = async () => {
-    console.log("Called Submit");
-    console.log(answered_data);
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json,",
-      },
-      body: JSON.stringify(answered_data),
-    };
+    const data = answered_data;
+
+    // axios
+    //   .post("http://localhost:4000/evaluate", data)
+    //   .then((response) => {
+    //     console.log(response.data.message);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
     try {
-      console.log(options);
-      const evaluation_data = await fetch(
+      const response_axios = await axios.post(
         "http://localhost:4000/evaluate",
-        options
+        data
       );
-      console.log(evaluation_data);
-      if (evaluation_data.ok) {
-        const evaluation_data_json = await evaluation_data.json();
-        console.log(evaluation_data_json);
-        navigate("/evaluate");
+      if (response_axios.ok) {
+        console.log(response_axios.data.message);
       } else {
-        console.log("server response was not okay");
+        console.log("Error from server");
       }
     } catch (error) {
-      console.log("an error occured for evaluation" + error);
+      console.log("Can't make the connection" + error);
     }
+
+    // fetch("http://localhost:4000/evaluate", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json,",
+    //   },
+    //   body: JSON.stringify(data),
+    // }).then((resp) => {
+    //   resp.json();
+    // }).then((result)=>{
+    //   console.log(result);
+    // });
   };
   useEffect(() => {
     fun();
