@@ -40,12 +40,17 @@ const Question = () => {
     // const data_to_send={
 
     // }
+    const test_data={
+      name:"tanisk",
+      age:"34",
+      height:"445"
+    }
       const optio={
-        method:'POST',
+        method:'GET',
         headers:{
           'Content-Type':'application/json,'
         },
-        body:JSON.stringify(answered_data),
+        body:JSON.stringify(test_data)
       }
       try
       {
@@ -98,8 +103,8 @@ const Question = () => {
   return (
 
     <Stack gap={2}>
-      { recieved_data.map((element)=>{
-       return <QuizCard prop_name={element} answered_array={set_answered_data} answered_array_second={answered_data}> </QuizCard>
+      { recieved_data.map((element,index)=>{
+       return <QuizCard key={index} prop_name={element} answered_array={set_answered_data} answered_array_second={answered_data}> </QuizCard>
       })}
 {/*      
      <QuizCard prop_name={recieved_data[0]}/> */}
