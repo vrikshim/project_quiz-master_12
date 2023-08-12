@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 // commented
 import axios from "axios";
 
+=======
+>>>>>>> 95c634263d05d6f793672a02f168fda75c2668fb
 import { Stack, Button } from "@mui/material";
 import QuizCard from "./QuizCard";
 import React, { useEffect } from "react";
