@@ -1,0 +1,2 @@
+q1)why do we need to use router when we can already app.use
+ans) This is done to make the code more readable and compartmentalise the various functionalities. We can not use app.() in the routes folder and it instead acts a middleware
