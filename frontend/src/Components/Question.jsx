@@ -1,5 +1,9 @@
+
 // commented
 import axios from "axios";
+
+
+
 
 import { Stack, Button } from "@mui/material";
 import QuizCard from "./QuizCard";
@@ -30,6 +34,7 @@ const Question = () => {
   const to_submit_the_data = async () => {
     const data = answered_data;
 
+
     axios
       .post("http://localhost:4000/evaluate", data)
       .then((response) => {
@@ -52,6 +57,28 @@ const Question = () => {
     // } catch (error) {
     //   console.log("Can't make the connection" + error);
     // }
+    // axios
+    //   .post("http://localhost:4000/evaluate", data)
+    //   .then((response) => {
+    //     console.log(response.data.message);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
+    try {
+      const response_axios = await axios.post(
+        "http://localhost:4000/evaluate",
+        data
+      );
+      if (response_axios.ok) {
+        console.log(response_axios.data.message);
+      } else {
+        console.log("Error from server");
+      }
+    } catch (error) {
+      console.log("Can't make the connection" + error);
+    }
+
 
     // fetch("http://localhost:4000/evaluate", {
     //   method: "POST",

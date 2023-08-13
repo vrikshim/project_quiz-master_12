@@ -1,6 +1,9 @@
 const fun = async (req, res) => {
   try {
+
     //  console.log("hello")
+    console.log("in the evaluate function");
+
     console.log(req.body);
     //  console.log("mello")
     const response = {
@@ -9,9 +12,12 @@ const fun = async (req, res) => {
       data: req.body, // You can add additional information here
     };
     res.status(200).json(response);
+
     // res.status(200).json(
     // req.body
     // )
+
+
   } catch (error) {
     res.status(500).json({
       success: false,
