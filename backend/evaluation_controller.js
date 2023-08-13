@@ -9,7 +9,7 @@ const fun = async (req, res) => {
     const response = {
       success: true,
       message: "Evaluation successful",
-      data: req.body, // You can add additional information here
+      body: req.body, // You can add additional information here
     };
     res.status(200).json(response);
 
